@@ -9,7 +9,7 @@ from discord.utils import get
 
 channels=[928526838261751828,928531766824796202]
 load_dotenv()
-#TOKEN = "OTI4NDk3MzM5OTQ4MjA0MDcy.YdZoiA.9XOYpnaV2Nwa1pghxagDg9IbKeQ"
+
 TOKEN=os.getenv('DISCORD_TOKEN')
 GUILD=os.getenv('DISCORD_GUILD')
 
