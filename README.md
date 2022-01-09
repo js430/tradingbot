@@ -1,6 +1,6 @@
 # tradingbot
 
-Foobar is a Python discord bot for options/stock traders to alert easily in multiple servers
+tradingbot is a Python discord bot for options/stock traders to alert easily in multiple servers
 ## Installation
 
 Use git clone or your choice of repository cloning to pull the repo
@@ -24,7 +24,7 @@ git clone https://github.com/js430/tradingbot.git
 !buy 1/6 SPY 480 C .65 25 image=None
 
 #eSell signal
-#parameters: % of position sold, tickers, price
+#parameters: % of position sold, ticker, price
 !eSell 25 SPY .56
 
 #msg
