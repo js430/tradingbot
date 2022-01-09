@@ -8,8 +8,15 @@ Use git clone or your choice of repository cloning to pull the repo
 ```bash
 git clone https://github.com/js430/tradingbot.git
 ```
+After pulling the repo, in the same folder as the tradingbot.py, create a .env file with the following format:
 
-## Usage
+```bash
+#.env
+DISCORD_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+replacing the x's with your discord bot token as seen on the bot page on [Discord's developer portal](https://discord.com/developers/applications)
+
+REMEMBER NEVER SHARE YOUR BOT TOKEN WITH ANYONE. TREAT IT LIKE YOU WOULD TREAT A SHA256 PRIVATE KEY## Usage
 
 ```python
 !python tradingbot.py
