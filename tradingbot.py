@@ -14,10 +14,10 @@ GUILD=os.getenv('DISCORD_GUILD')
 
 server_everyone=[788637809963302922,778326013998006284]
 
-alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926]
-#alert_channels=[928741202776457257]
-#Neptune, bot test, stock lounge, crimson, freedom
-
+alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926, 929520109788209152]
+#alert_channels=[928741202776457257, 929520109788209152]
+#Stock Degen, bot test, stock lounge, crimson, freedom
+#bot test
 bot = commands.Bot(command_prefix='!')
 
 @bot.event
@@ -43,7 +43,10 @@ async def buy_order(ctx, date, ticker, strike, CoP, price, cons=None, image=None
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
         else:
-            role=get(guilds.roles, name='prime-alerts')
+            if(guilds.id==911385966864896081):
+                role=get(guilds.roles, id=911690821739356170)
+            else:
+                role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                 #if(channel.name == 'test-channel'):
@@ -61,7 +64,10 @@ async def sell_order(ctx, date, ticker, strike, CoP, price, perc, image=None):
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
         else:
-            role=get(guilds.roles, name='prime-alerts')
+            if(guilds.id==911385966864896081):
+                role=get(guilds.roles, id=911690821739356170)
+            else:
+                role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                 #if(channel.name == 'test-channel'):
@@ -79,7 +85,10 @@ async def message(ctx, txt, image=None):
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
         else:
-            role=get(guilds.roles, name='prime-alerts')
+            if(guilds.id==911385966864896081):
+                role=get(guilds.roles, id=911690821739356170)
+            else:
+                role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                 #if(channel.name == 'test-channel'):
@@ -92,12 +101,15 @@ async def eSell(ctx, perc, ticker, price):
     for guilds in bot.guilds:
         if guilds.id in server_everyone:
             for channel in guilds.channels:
-                if(channel.name in alert_channels):
+                if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
         else:
-            role=get(guilds.roles, name='prime-alerts')
+            if(guilds.id==911385966864896081):
+                role=get(guilds.roles, id=911690821739356170)
+            else:
+                role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
-                if(channel.name in alert_channels):
+                if(channel.id in alert_channels):
                 #if(channel.name == 'test-channel'):
                     await channel.send(role.mention, embed=embed)
 bot.run(TOKEN)
