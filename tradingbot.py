@@ -3,6 +3,8 @@ import os
 import discord
 import random
 import time
+import string
+from datetime import date
 from dotenv import load_dotenv
 from discord.ext import commands
 from discord.utils import get
@@ -98,6 +100,60 @@ async def message(ctx, txt, image=None):
 @commands.has_role('Prime')
 async def eSell(ctx, perc, ticker, price):
     embed=discord.Embed(description="Sell "+perc+"%"+" of "+ticker+" @"+price, color=0xFF5733)
+    for guilds in bot.guilds:
+        if guilds.id in server_everyone:
+            for channel in guilds.channels:
+                if(channel.id in alert_channels):
+                    await channel.send(ctx.message.guild.default_role, embed=embed)
+        else:
+            if(guilds.id==911385966864896081):
+                role=get(guilds.roles, id=911690821739356170)
+            else:
+                role=get(guilds.roles, name=('prime-alerts'))
+            for channel in guilds.channels:
+                if(channel.id in alert_channels):
+                #if(channel.name == 'test-channel'):
+                    await channel.send(role.mention, embed=embed)
+
+@bot.command(name='recap')
+@commands.has_role('Prime')
+async def recap(ctx, tickers, percents):
+    tickers=str(tickers)
+    ticks=tickers.split(',')
+    percents=str(percents)
+    percs=percents.split(',')
+    rg=[]
+    for i in percs:
+        if i[0]=='+':
+            rg.append('g')
+        else:
+            rg.append('r')
+    embed_string=""
+    for i in range(0, len(ticks)):
+        #print(i)
+        result=""
+        result=result+ticks[i]+" "+percs[i]+"% "
+        if(rg[i]=='g'):
+            result=result+" <:green_circle:930207873961697412>"
+        else:
+            result=result+" <:red_circle:930208152559956028>"
+        result=result+"\n"
+        #print(result)
+        embed_string=embed_string+result
+    total=0
+    for i in range(0, len(percs)):
+        if rg[i]=='g':
+            total=total+int(percs[i][1:])
+        else:
+            total=total-int(percs[i][1:])
+    embed_string=embed_string+"\n \n Total:"+str(total)+"%<:rocket:930210721655046144>"
+    avg_gain=round(total/len(percs),2)
+    Winrate=round(rg.count('g')/len(rg)*100,2)
+    embed_string=embed_string+"\nWinrate="+str(Winrate)+"%\n"+"AvgGain="+str(avg_gain)+ "%"+"per trade"
+
+    today=date.today()
+    today_date = today.strftime("%m/%d")
+    embed=discord.Embed(title= today_date+" recap", description=embed_string)
     for guilds in bot.guilds:
         if guilds.id in server_everyone:
             for channel in guilds.channels:
