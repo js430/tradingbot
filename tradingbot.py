@@ -146,10 +146,12 @@ async def recap(ctx, tickers, percents):
             total=total+int(percs[i][1:])
         else:
             total=total-int(percs[i][1:])
-    embed_string=embed_string+"\n \n Total:"+str(total)+"%<:rocket:930210721655046144>"
+    embed_string=embed_string+"\n \n Total:"+str(total)
+    if(total>100):
+        embed_string=embed_string+"%<:rocket:930210721655046144>\n"
     avg_gain=round(total/len(percs),2)
     Winrate=round(rg.count('g')/len(rg)*100,2)
-    embed_string=embed_string+"\nWinrate="+str(Winrate)+"%\n"+"AvgGain="+str(avg_gain)+ "%"+"per trade"
+    embed_string=embed_string+"\nWinrate="+str(Winrate)+"%\n"+"AvgGain="+str(avg_gain)+ "%"+" per trade"
 
     today=date.today()
     today_date = today.strftime("%m/%d")
