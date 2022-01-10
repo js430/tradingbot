@@ -38,6 +38,11 @@ REMEMBER NEVER SHARE YOUR BOT TOKEN WITH ANYONE. TREAT IT LIKE YOU WOULD TREAT A
 #parameters: message, image(optional)
 !msg txt image=None
 
+#recap
+#parameters: tickers, percents
+!recap SPY,VXX,SPX +500,+50,+1500
+#Note:no spaces between each tickerk or each percent, otherwise discord will treat them as separate argument, it needs to be one continuous string
+
 ```
 
 ## Contributing
