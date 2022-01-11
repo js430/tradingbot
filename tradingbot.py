@@ -70,6 +70,8 @@ async def sell_order(ctx, date, ticker, strike, CoP, price, perc, image=None):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
+            elif(guilds.id==727350310384959508):
+                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -91,6 +93,8 @@ async def message(ctx, txt, image=None):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
+            elif(guilds.id==727350310384959508):
+                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -110,6 +114,8 @@ async def eSell(ctx, perc, ticker, price):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
+            elif(guilds.id==727350310384959508):
+                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -166,6 +172,8 @@ async def recap(ctx, tickers, percents):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
+            elif(guilds.id==727350310384959508):
+                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
