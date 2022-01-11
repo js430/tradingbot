@@ -14,8 +14,8 @@ load_dotenv()
 TOKEN=os.getenv('DISCORD_TOKEN')
 GUILD=os.getenv('DISCORD_GUILD')
 
-server_everyone=[788637809963302922,778326013998006284]
-
+server_everyone=[788637809963302922,778326013998006284, 727350310384959508]
+# x, x, Ace of trades
 alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926, 929520109788209152,930267744341983244]
 #alert_channels=[928741202776457257, 929520109788209152]
 #Stock Degen, bot test, stock lounge, crimson, freedom, Ace of trades
@@ -47,8 +47,6 @@ async def buy_order(ctx, date, ticker, strike, CoP, price, cons=None, image=None
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id==727350310384959508):
-                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -70,8 +68,6 @@ async def sell_order(ctx, date, ticker, strike, CoP, price, perc, image=None):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id==727350310384959508):
-                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -93,8 +89,6 @@ async def message(ctx, txt, image=None):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id==727350310384959508):
-                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -114,8 +108,6 @@ async def eSell(ctx, perc, ticker, price):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id==727350310384959508):
-                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -172,8 +164,6 @@ async def recap(ctx, tickers, percents):
         else:
             if(guilds.id==911385966864896081):
                 role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id==727350310384959508):
-                role=get(guilds.roles, id=762450132028751912)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
