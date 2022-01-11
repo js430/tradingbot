@@ -43,6 +43,11 @@ REMEMBER NEVER SHARE YOUR BOT TOKEN WITH ANYONE. TREAT IT LIKE YOU WOULD TREAT A
 !recap SPY,VXX,SPX +500,+50,+1500
 #Note:no spaces between each tickerk or each percent, otherwise discord will treat them as separate argument, it needs to be one continuous string
 
+#weeklyrecap
+#parameters: tickers, percents
+!wrecap SPY,VXX,SPX +500,+50,+1500
+#identical to !recap, just titles it for the week rather than the day
+
 ```
 
 ## Contributing
