@@ -138,14 +138,16 @@ async def recap(ctx, tickers, percents):
     for i in range(0, len(ticks)):
         #print(i)
         result=""
+        if(rg[i]=='g'):
+            result=result+" <:green_circle:930207873961697412> "
+        elif(rg[i]=='r'):
+            result=result+" <:red_circle:930208152559956028> "
+        else:
+            result=result+" <:white_circle:930553189554589807> "
         if(rg[i]=='n'):
             result=result+ticks[i]+":"+" B/E"
         else:
             result=result+ticks[i]+": "+percs[i]+"% "
-        if(rg[i]=='g'):
-            result=result+" <:green_circle:930207873961697412>"
-        elif(rg[i]=='r'):
-            result=result+" <:red_circle:930208152559956028>"
         result=result+"\n"
         #print(result)
         embed_string=embed_string+result
@@ -203,14 +205,16 @@ async def recap(ctx, tickers, percents):
     for i in range(0, len(ticks)):
         #print(i)
         result=""
-        if(rg[i]=='n'):
-            result=result+ticks[i]+": "+"B/E"
-        else:
-            result=result+ticks[i]+": "+percs[i]+"% "
         if(rg[i]=='g'):
             result=result+" <:green_circle:930207873961697412>"
         elif(rg[i]=='r'):
             result=result+" <:red_circle:930208152559956028>"
+        else:
+            result=result+" <:white_circle:930553189554589807> "
+        if(rg[i]=='n'):
+            result=result+ticks[i]+": "+"B/E"
+        else:
+            result=result+ticks[i]+": "+percs[i]+"% "
         result=result+"\n"
         #print(result)
         embed_string=embed_string+result
