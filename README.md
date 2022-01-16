@@ -22,13 +22,15 @@ REMEMBER NEVER SHARE YOUR BOT TOKEN WITH ANYONE. TREAT IT LIKE YOU WOULD TREAT A
 !python tradingbot.py
 
 #buy signal
-#parameters: date, ticker, strike price, call/put, price, max # of cons (optional), image link (optional)
+#parameters: ticker, expiry, strike, CP, entry, stoploss, risk, comments(optional), image(optional)
+#stoploss: Can be "T", "R", "M", or "L" for Tight(10%), Regular(25%), Mental(50%), or Lotto (No SL)
+!buy SPY Jan14'22 470 CALL 1.5 R 2 "Swing trade"
 
-!buy 1/6 SPY 480 C .65 cons=None image=None
 
-# sell signal
-#parameters: date, ticker, strike price, call/put, price, % of position sold, image link (optional)
-!buy 1/6 SPY 480 C .65 25 image=None
+# trim signal
+#parameters:  ticker, expiry, tp#, image link (optional)
+#tp#: Indicates which target price it has hit
+!trim SPY JAN14'22 1
 
 #eSell signal
 #parameters: % of position sold, ticker, price

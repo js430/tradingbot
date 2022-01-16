@@ -15,14 +15,14 @@ TOKEN=os.getenv('DISCORD_TOKEN')
 GUILD=os.getenv('DISCORD_GUILD')
 
 TEST=False
-server_everyone=[788637809963302922,778326013998006284, 727350310384959508]
+server_everyone=[788637809963302922,778326013998006284, 727350310384959508,788637809963302922]
 # x, x, Ace of trades
 if TEST:
     alert_channels=[928741202776457257]
 else:
-    alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926, 929520109788209152,930267744341983244]
+    alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926, 929520109788209152,930267744341983244,932052036663517215]
 #bot test
-#Stock Degen, bot test, stock lounge, crimson, freedom, Ace of trades
+#Stock Degen, bot test, stock lounge, crimson, freedom, Platinum trading, Ace of trades, ,Penny lifestyle
 
 bot = commands.Bot(command_prefix='!')
 
@@ -37,10 +37,31 @@ async def on_ready():
 
 @bot.command(name='buy')
 @commands.has_role('Prime')
-async def buy_order(ctx, date, ticker, strike, CoP, price, cons=None, image=None):
-    embed=discord.Embed(title="BTO", description=date+" "+ticker+" "+strike+CoP+" @"+price, color=0x00FF00)
-    if(cons!=None):
-        embed.set_footer(text="Buy a max of "+cons+" cons per play")
+async def buy_order(ctx, ticker, expiry, strike, CP, entry, stoploss, risk, comments=None, image=None):
+    tp1=round(float(entry)*1.25,2)
+    tp2=round(float(entry)*1.5,2)
+    tp3=round(float(entry)*2,2)
+    sl=0
+    if stoploss==("R" or 'r'):
+        sl=round(float(entry)*.75,2)
+    elif stoploss==("T" or 't'):
+        sl=round(float(entry)*.9,2)
+    elif stoploss==("M" or 'm'):
+        sl=round(float(entry)*.5,2)
+    elif stoploss==("L" or 'l'):
+        sl="No SL"
+    desc="<:tickets:932081190876368926> **Ticker:** "+ticker+"\n"+"<:dart:932082622585274458> **Strike:** "+strike+"\n"
+    desc+="<:speech_left:932084185647185953> **C\P:** "+CP+"\n"+"<:door:932084054877155388> **Entry:** "+entry+"\n"+"<:calendar_spiral:932081818788851752> **Expiry:** "+expiry+"\n"
+    desc+="<:warning:932083976112316467> **Risk level:** "+risk+"/5"+"\n\n<:chart_with_downwards_trend:932081529079857273> **SL:** "+str(sl)
+    desc+="\n"+"<:chart_with_upwards_trend:932080615170400317> **TP1: **"+str(tp1)+"\n"+"<:chart_with_upwards_trend:932080615170400317> **TP2: **"
+    desc+=str(tp2)+"\n"+"<:chart_with_upwards_trend:932080615170400317> **TP3: **"+str(tp3)+"+leave runners from here"+"\n"
+    if(comments != None):
+        desc=desc+"\n<:notepad_spiral:932085365538422844> **Comments**: "+comments 
+    desc+="\n [Twitter](https://twitter.com/Prime_Options)"
+    embed=discord.Embed(title="New Position", description=desc, color=0x00FF00)
+    today=date.today()
+    today_date = today.strftime("%m/%d/%y")
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://www.enjpg.com/img/2020/nice-24-scaled.jpg")
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
@@ -58,10 +79,19 @@ async def buy_order(ctx, date, ticker, strike, CoP, price, cons=None, image=None
                 #if(channel.name == 'test-channel'):
                     await channel.send(role.mention, embed=embed)
    
-@bot.command(name='sell')
+@bot.command(name='trim')
 @commands.has_role('Prime')
-async def sell_order(ctx, date, ticker, strike, CoP, price, perc, image=None):
-    embed=discord.Embed(title="STC"+ " "+ perc+"%", description=date+" "+ticker+" "+strike+CoP+" @"+price, color=0xFF5733)
+async def sell_order(ctx, ticker, expiry, tp, image=None):
+    desc="<:tickets:932081190876368926> **Ticker:** "+ticker+"\n"+"<:calendar_spiral:932081818788851752> **Expiry:** "+expiry+"\n"
+    if tp=="3":
+        desc+="<:white_check_mark:932093519055712298> TP"+tp+" hit, sell 25%, leave runners if you want\n"
+    else:
+        desc+="<:white_check_mark:932093519055712298> TP"+tp+" hit, sell 25%\n"
+    desc+="[Twitter](https://twitter.com/Prime_Options)"
+    embed=discord.Embed(title="Trim", description=desc, color=0xFF5733)
+    today=date.today()
+    today_date = today.strftime("%m/%d/%y")
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://www.enjpg.com/img/2020/nice-24-scaled.jpg")
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
