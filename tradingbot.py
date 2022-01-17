@@ -19,10 +19,10 @@ server_everyone=[788637809963302922,778326013998006284, 727350310384959508,78863
 # x, x, Ace of trades
 if TEST:
     alert_channels=[928741202776457257]
+    #bot test
 else:
-    alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926, 929520109788209152,930267744341983244,932052036663517215, 932105552685858838,929937828182392913,932441096317984768]
-#bot test
-#Stock Degen, bot test, stock lounge, crimson, freedom, Platinum trading, Ace of trades, ,Penny lifestyle, Sky high trades, Find your edge trading, stock boys
+    alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926, 929520109788209152, 930267744341983244, 932052036663517215, 932105552685858838, 929937828182392913,932441096317984768]
+                    #Stock Degen,       bot test,               stock lounge,       crimson,            freedom,           Platinum trading,    Ace of trades, ,    Penny lifestyle, Sky high trades, Find your edge trading, stock boys
 
 bot = commands.Bot(command_prefix='!')
 
@@ -69,12 +69,12 @@ async def buy_order(ctx, ticker, expiry, strike, CP, entry, stoploss, risk, comm
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==706744538416545812):
+        elif(guilds.id==706744538416545812 or (guilds.id==774834449598644225)): #stock boys+FYE
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(embed=embed)
         else:
-            if(guilds.id==911385966864896081):
+            if(guilds.id==911385966864896081): #Platinum trading
                 role=get(guilds.roles, id=911690821739356170)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
@@ -103,12 +103,12 @@ async def sell_order(ctx, ticker, expiry, tp, image=None):
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==706744538416545812):
+        elif(guilds.id==706744538416545812 or (guilds.id==774834449598644225)): #stock boys +FYE
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(embed=embed)
         else:
-            if(guilds.id==911385966864896081):
+            if(guilds.id==911385966864896081): #platinum trading
                 role=get(guilds.roles, id=911690821739356170)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
@@ -128,12 +128,12 @@ async def message(ctx, txt, image=None):
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==706744538416545812):
+        elif((guilds.id==706744538416545812) or (guilds.id==774834449598644225)):#stock boys and FYE
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(embed=embed)
         else:
-            if(guilds.id==911385966864896081):
+            if(guilds.id==911385966864896081): #platinum
                 role=get(guilds.roles, id=911690821739356170)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
@@ -151,12 +151,12 @@ async def eSell(ctx, perc, ticker, price):
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==706744538416545812):
+        elif(guilds.id==706744538416545812 or (guilds.id==774834449598644225)): #stock boys+FYE
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(embed=embed)
         else:
-            if(guilds.id==911385966864896081):
+            if(guilds.id==911385966864896081): #platinum
                 role=get(guilds.roles, id=911690821739356170)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
@@ -222,12 +222,12 @@ async def recap(ctx, tickers, percents):
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==706744538416545812):
+        elif(guilds.id==706744538416545812 or (guilds.id==774834449598644225)): #stock boys+FYE
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(embed=embed)
         else:
-            if(guilds.id==911385966864896081):
+            if(guilds.id==911385966864896081): #platnium
                 role=get(guilds.roles, id=911690821739356170)
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
@@ -293,13 +293,14 @@ async def recap(ctx, tickers, percents):
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==706744538416545812):
+        elif(guilds.id==706744538416545812 or (guilds.id==774834449598644225)): #stock boys+FYE
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(embed=embed)
         else:
-            if(guilds.id==911385966864896081):
+            if(guilds.id==911385966864896081): #platnium
                 role=get(guilds.roles, id=911690821739356170)
+
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
