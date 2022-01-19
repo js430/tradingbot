@@ -78,6 +78,8 @@ async def buy_order(ctx, ticker, expiry, strike, CP, entry, stoploss, risk, comm
                 role=get(guilds.roles, id=911690821739356170)
             elif(guilds.id== 807350749944086548): #Freedom traders
                 role=get(guilds.roles,  id=864294591502483466)
+            elif(guilds.id== 706744538416545812): #stock boys
+                role=get(guilds.roles,  id=916698191645261956)  
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -114,6 +116,8 @@ async def sell_order(ctx, ticker, expiry, tp, image=None):
                 role=get(guilds.roles, id=911690821739356170)
             elif(guilds.id== 807350749944086548): #Freedom traders
                 role=get(guilds.roles,  id=864294591502483466)
+            elif(guilds.id== 706744538416545812): #stock boys
+                role=get(guilds.roles,  id=916698191645261956)  
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -141,6 +145,8 @@ async def message(ctx, txt, image=None):
                 role=get(guilds.roles, id=911690821739356170)
             elif(guilds.id== 807350749944086548): #Freedom traders
                 role=get(guilds.roles,  id=864294591502483466)
+            elif(guilds.id== 706744538416545812): #stock boys
+                role=get(guilds.roles,  id=916698191645261956)  
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -166,6 +172,8 @@ async def eSell(ctx, perc, ticker, price):
                 role=get(guilds.roles, id=911690821739356170)
             elif(guilds.id== 807350749944086548): #Freedom traders
                 role=get(guilds.roles,  id=864294591502483466)
+            elif(guilds.id== 706744538416545812): #stock boys
+                role=get(guilds.roles,  id=916698191645261956)  
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -239,6 +247,8 @@ async def recap(ctx, tickers, percents):
                 role=get(guilds.roles, id=911690821739356170)
             elif(guilds.id== 807350749944086548): #Freedom traders
                 role=get(guilds.roles,  id=864294591502483466)
+            elif(guilds.id== 706744538416545812): #stock boys
+                role=get(guilds.roles,  id=916698191645261956)  
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
@@ -303,7 +313,7 @@ async def recap(ctx, tickers, percents):
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==706744538416545812 or (guilds.id==774834449598644225)): #stock boys+FYE
+        elif(guilds.id==774834449598644225): #FYE
             for channel in guilds.channels:
                 if(channel.id in alert_channels):
                     await channel.send(embed=embed)
@@ -312,6 +322,8 @@ async def recap(ctx, tickers, percents):
                 role=get(guilds.roles, id=911690821739356170)
             elif(guilds.id== 807350749944086548): #Freedom traders
                 role=get(guilds.roles,  id=864294591502483466)
+            elif(guilds.id== 706744538416545812): #stock boys
+                role=get(guilds.roles,  id=916698191645261956)            
             else:
                 role=get(guilds.roles, name=('prime-alerts'))
             for channel in guilds.channels:
