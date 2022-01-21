@@ -15,15 +15,30 @@ TOKEN=os.getenv('DISCORD_TOKEN')
 GUILD=os.getenv('DISCORD_GUILD')
 
 TEST=False
-server_everyone=[788637809963302922,778326013998006284, 727350310384959508,788637809963302922]
-# x, x, Ace of trades
 if TEST:
     alert_channels=[928741202776457257]
     #bot test
 else:
-    alert_channels=[928360625632067664, 928741202776457257, 928345916128247868, 927611713879146546, 925526435500793926, 929520109788209152, 930267744341983244, 932052036663517215, 932105552685858838, 929937828182392913,  932441096317984768, 860152786741362688]
-                    #Stock Degen,       bot test,               stock lounge,       crimson,            freedom,           Platinum trading,    Ace of trades, ,    Penny lifestyle, Sky high trades, Find your edge trading, stock boys,        Freedom Traders
-
+    my_file=open("channels.txt", "r")
+    content=my_file.read()
+    alert_channels=content.split(",")
+    alert_channels=[int(i) for i in alert_channels]
+    my_file.close()
+    my_file=open("ping_servers.txt", "r")
+    content=my_file.read()
+    role_pings=content.split(",")
+    role_pings=[int(i) for i in role_pings]
+    my_file.close()
+    my_file=open("everyone_ping.txt", "r")
+    content=my_file.read()
+    everyone_servers=content.split(",")
+    everyone_servers=[int(i) for i in everyone_servers]
+    my_file.close()
+    my_file=open("no_ping.txt", "r")
+    content=my_file.read()
+    no_ping=content.split(",")
+    no_ping=[int(i) for i in no_ping]
+    my_file.close()
 bot = commands.Bot(command_prefix='!')
 
 @bot.event
@@ -31,6 +46,7 @@ async def on_ready():
     print('Bot is ready to be used')
    # after it is ready do it
     for guild in bot.guilds:
+        
         print(guild)
         print(guild.id)
 
@@ -65,27 +81,16 @@ async def buy_order(ctx, ticker, expiry, strike, CP, entry, stoploss, risk, comm
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
-        if guilds.id in server_everyone:
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==774834449598644225): #stock boys+FYE
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(embed=embed)
-        else:
-            if(guilds.id==911385966864896081): #Platinum trading
-                role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id== 807350749944086548): #Freedom traders
-                role=get(guilds.roles,  id=864294591502483466)
-            elif(guilds.id== 706744538416545812): #stock boys
-                role=get(guilds.roles,  id=916698191645261956)  
-            else:
-                role=get(guilds.roles, name=('prime-alerts'))
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                #if(channel.name == 'test-channel'):
-                    await channel.send(role.mention, embed=embed)
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                await channel.send(role.mention, embed=embed)
+            elif(channel.id in everyone_servers):
+                await channel.send(ctx.message.guild.default_role, embed=embed)
+            elif(channel.id in no_ping):
+                await channel.send(embed=embed)
+
    
 @bot.command(name='trim')
 @commands.has_role('Prime')
@@ -103,27 +108,15 @@ async def sell_order(ctx, ticker, expiry, tp, image=None):
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
-        if guilds.id in server_everyone:
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==774834449598644225): #FYE
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(embed=embed)
-        else:
-            if(guilds.id==911385966864896081): #platinum trading
-                role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id== 807350749944086548): #Freedom traders
-                role=get(guilds.roles,  id=864294591502483466)
-            elif(guilds.id== 706744538416545812): #stock boys
-                role=get(guilds.roles,  id=916698191645261956)  
-            else:
-                role=get(guilds.roles, name=('prime-alerts'))
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                #if(channel.name == 'test-channel'):
-                    await channel.send(role.mention, embed=embed)
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                await channel.send(role.mention, embed=embed)
+            elif(channel.id in everyone_servers):
+                await channel.send(ctx.message.guild.default_role, embed=embed)
+            elif(channel.id in no_ping):
+                await channel.send(embed=embed)
 
 @bot.command(name='msg')
 @commands.has_role('Prime')
@@ -132,54 +125,32 @@ async def message(ctx, txt, image=None):
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
-        if guilds.id in server_everyone:
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==774834449598644225):#FYE
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(embed=embed)
-        else:
-            if(guilds.id==911385966864896081): #platinum
-                role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id==807350749944086548): #Freedom traders
-                role=get(guilds.roles,  id=864294591502483466)
-            elif(guilds.id==706744538416545812): #stock boys
-                role=get(guilds.roles,  id=916698191645261956)  
-            else:
-                role=get(guilds.roles, name=('prime-alerts'))
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                #if(channel.name == 'test-channel'):
-                    await channel.send(role.mention, embed=embed)
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                await channel.send(role.mention, embed=embed)
+            elif(channel.id in everyone_servers):
+                await channel.send(ctx.message.guild.default_role, embed=embed)
+            elif(channel.id in no_ping):
+                await channel.send(embed=embed)
+
+        
 
 @bot.command(name='eSell')
 @commands.has_role('Prime')
 async def eSell(ctx, perc, ticker, price):
     embed=discord.Embed(description="Sell "+perc+"%"+" of "+ticker+" @"+price, color=0xFF5733)
     for guilds in bot.guilds:
-        if guilds.id in server_everyone:
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==774834449598644225): #FYE
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(embed=embed)
-        else:
-            if(guilds.id==911385966864896081): #platinum
-                role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id== 807350749944086548): #Freedom traders
-                role=get(guilds.roles,  id=864294591502483466)
-            elif(guilds.id== 706744538416545812): #stock boys
-                role=get(guilds.roles,  id=916698191645261956)  
-            else:
-                role=get(guilds.roles, name=('prime-alerts'))
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                #if(channel.name == 'test-channel'):
-                    await channel.send(role.mention, embed=embed)
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                await channel.send(role.mention, embed=embed)
+            elif(channel.id in everyone_servers):
+                await channel.send(ctx.message.guild.default_role, embed=embed)
+            elif(channel.id in no_ping):
+                await channel.send(embed=embed)
 
 @bot.command(name='recap')
 @commands.has_role('Prime')
@@ -234,27 +205,16 @@ async def recap(ctx, tickers, percents):
         color=0xFF5733
     embed=discord.Embed(title= today_date+" recap", description=embed_string, color=color)
     for guilds in bot.guilds:
-        if guilds.id in server_everyone:
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==774834449598644225): #FYE
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(embed=embed)
-        else:
-            if(guilds.id==911385966864896081): #platnium
-                role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id== 807350749944086548): #Freedom traders
-                role=get(guilds.roles,  id=864294591502483466)
-            elif(guilds.id== 706744538416545812): #stock boys
-                role=get(guilds.roles,  id=916698191645261956)  
-            else:
-                role=get(guilds.roles, name=('prime-alerts'))
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                #if(channel.name == 'test-channel'):
-                    await channel.send(role.mention, embed=embed)
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                await channel.send(role.mention, embed=embed)
+            elif(channel.id in everyone_servers):
+                await channel.send(ctx.message.guild.default_role, embed=embed)
+            elif(channel.id in no_ping):
+                await channel.send(embed=embed)
+
 
 @bot.command(name='wrecap')
 @commands.has_role('Prime')
@@ -309,25 +269,14 @@ async def recap(ctx, tickers, percents):
         color=0xFF5733
     embed=discord.Embed(title= "Week of "+monday+" recap", description=embed_string, color=color)
     for guilds in bot.guilds:
-        if guilds.id in server_everyone:
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(ctx.message.guild.default_role, embed=embed)
-        elif(guilds.id==774834449598644225): #FYE
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                    await channel.send(embed=embed)
-        else:
-            if(guilds.id==911385966864896081): #platnium
-                role=get(guilds.roles, id=911690821739356170)
-            elif(guilds.id== 807350749944086548): #Freedom traders
-                role=get(guilds.roles,  id=864294591502483466)
-            elif(guilds.id== 706744538416545812): #stock boys
-                role=get(guilds.roles,  id=916698191645261956)            
-            else:
-                role=get(guilds.roles, name=('prime-alerts'))
-            for channel in guilds.channels:
-                if(channel.id in alert_channels):
-                #if(channel.name == 'test-channel'):
-                    await channel.send(role.mention, embed=embed)
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                await channel.send(role.mention, embed=embed)
+            elif(channel.id in everyone_servers):
+                await channel.send(ctx.message.guild.default_role, embed=embed)
+            elif(channel.id in no_ping):
+                await channel.send(embed=embed)
+
 bot.run(TOKEN)
