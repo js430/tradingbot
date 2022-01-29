@@ -143,7 +143,7 @@ async def buy_order(ctx, ticker, expiry, strike, CP, entry, stoploss, risk, comm
     embed=discord.Embed(title="New Position", description=desc, color=0x00FF00)
     today=date.today()
     today_date = today.strftime("%m/%d/%y")
-    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://www.enjpg.com/img/2020/nice-24-scaled.jpg")
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://i.imgur.com/Z7VczhT.png")
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
@@ -170,7 +170,7 @@ async def sell_order(ctx, ticker, expiry, tp, image=None):
     embed=discord.Embed(title="Trim", description=desc, color=0xFF5733)
     today=date.today()
     today_date = today.strftime("%m/%d/%y")
-    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://www.enjpg.com/img/2020/nice-24-scaled.jpg")
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://i.imgur.com/Z7VczhT.png")
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
@@ -187,7 +187,11 @@ async def sell_order(ctx, ticker, expiry, tp, image=None):
 @bot.command(name='msg')
 @commands.has_role('Prime')
 async def message(ctx, txt, image=None):
-    embed=discord.Embed(description=txt, color=0xFFFFFF)
+    txt+="\n [Twitter](https://twitter.com/Prime_Options)"
+    embed=discord.Embed(description=txt, color=0x0112a0)
+    today=date.today()
+    today_date = today.strftime("%m/%d/%y")
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://i.imgur.com/Z7VczhT.png")
     if(image!=None):
         embed.set_image(url=image)
     for guilds in bot.guilds:
@@ -207,6 +211,9 @@ async def message(ctx, txt, image=None):
 @commands.has_role('Prime')
 async def eSell(ctx, perc, ticker, price):
     embed=discord.Embed(description="Sell "+perc+"%"+" of "+ticker+" @"+price, color=0xFF5733)
+    today=date.today()
+    today_date = today.strftime("%m/%d/%y")
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://i.imgur.com/Z7VczhT.png")
     for guilds in bot.guilds:
         for channel in guilds.channels:
             if(channel.id in alert_channels):
@@ -270,6 +277,7 @@ async def recap(ctx, tickers, percents):
     else:
         color=0xFF5733
     embed=discord.Embed(title= today_date+" recap", description=embed_string, color=color)
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://i.imgur.com/Z7VczhT.png")
     for guilds in bot.guilds:
         for channel in guilds.channels:
             if(channel.id in alert_channels):
@@ -328,12 +336,14 @@ async def recap(ctx, tickers, percents):
     embed_string=embed_string+"\nWinrate="+str(Winrate)+"%\n"+"AvgGain="+str(avg_gain)+ "%"+" per trade"
 
     today=datetime.now()
+    today_date = today.strftime("%m/%d")
     monday=(today-timedelta(days=today.weekday())).strftime("%m/%d")
     if(total>0):
         color=0x00FF00
     else:
         color=0xFF5733
     embed=discord.Embed(title= "Week of "+monday+" recap", description=embed_string, color=color)
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://i.imgur.com/Z7VczhT.png")
     for guilds in bot.guilds:
         for channel in guilds.channels:
             if(channel.id in alert_channels):
