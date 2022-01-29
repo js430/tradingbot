@@ -75,34 +75,6 @@ async def sub(ctx, type, channel:discord.TextChannel=None, ping:discord.Role=Non
 @bot.command(name='unsubscribe')
 async def unsub(ctx, type, channel:discord.TextChannel=None, ping:discord.Role=None):
     remove_channel=str(channel.id)
-    remove_ping=str(ping.id)
-    if(type==('r' or 'R')):
-        file=open("ping_servers.txt", "a")
-        ps=file.read().indexsplit(",").remove(remove_ping)
-        file.truncate(0)
-        file.write(ps)
-        file.close()
-        file=open("channels.txt", "a")
-        ps=file.read().indexsplit(",").remove(remove_channel)
-        file.truncate(0)
-        file.write(ps)
-        file.close()
-    elif(type==('n' or 'N')):
-        file=open("no_ping.txt", "a")
-        ps=file.read().indexsplit(",").remove(remove_channel)
-        file.truncate(0)
-        file.write(ps)
-        file.close()
-    elif(type==('e' or 'E')):
-        file=open("everyone_ping.txt", "a")
-        ps=file.read().indexsplit(",").remove(remove_channel)
-        file.truncate(0)
-        file.write(ps)
-        file.close()
-
-@bot.command(name='unsubscribe')
-async def unsub(ctx, type, channel:discord.TextChannel=None, ping:discord.Role=None):
-    remove_channel=str(channel.id)
     print(remove_channel)
     if(type==('r' or 'R')):
         remove_ping=str(ping.id)
