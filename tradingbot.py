@@ -39,7 +39,7 @@ else:
     no_ping=content.split(",")
     no_ping=[int(i) for i in no_ping]
     my_file.close()
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='$')
 
 @bot.event
 async def on_ready():
