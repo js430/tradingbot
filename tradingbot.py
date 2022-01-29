@@ -50,6 +50,28 @@ async def on_ready():
         print(guild)
         print(guild.id)
 
+@bot.command(name='subscribe')
+async def sub(ctx, type, channel:discord.TextChannel=None, ping:discord.Role=None):
+    if(type==('r' or 'R')):
+        file=open("ping_servers.txt", "a")
+        string=","+str(ping.id)
+        file.write(string)
+        file.close()
+        file=open("channels.txt", "a")
+        string=","+str(channel.id)
+        file.write(string)
+        file.close()
+    elif(type==('n' or 'N')):
+        file=open("no_ping.txt", "a")
+        string=","+str(channel.id)
+        file.write(string)
+        file.close()
+    elif(type==('e' or 'E')):
+        file=open("everyone_ping.txt", "a")
+        string=","+str(channel.id)
+        file.write(string)
+        file.close()
+
 
 @bot.command(name='buy')
 @commands.has_role('Prime')
