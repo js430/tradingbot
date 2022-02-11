@@ -139,7 +139,7 @@ async def buy_order(ctx, ticker, expiry, strike, CP, entry, stoploss, risk, comm
     desc+=str(tp2)+"\n"+"<:chart_with_upwards_trend:932080615170400317> **TP3: **"+str(tp3)+"+leave runners from here"+"\n"
     if(comments != None):
         desc=desc+"\n<:notepad_spiral:932085365538422844> **Comments**: "+comments 
-    desc+="\n [Twitter](https://twitter.com/Prime_Options)"
+    desc+="\n [Linktree](https://linktr.ee/Prime_19)"
     embed=discord.Embed(title="New Position", description=desc, color=0x00FF00)
     today=date.today()
     today_date = today.strftime("%m/%d/%y")
@@ -166,7 +166,7 @@ async def sell_order(ctx, ticker, expiry, tp, image=None):
         desc+="<:white_check_mark:932093519055712298> TP"+tp+" hit, sell 25%, leave runners if you want\n"
     else:
         desc+="<:white_check_mark:932093519055712298> TP"+tp+" hit, sell 25%\n"
-    desc+="[Twitter](https://twitter.com/Prime_Options)"
+    desc+="\n [Linktree](https://linktr.ee/Prime_19)"
     embed=discord.Embed(title="Trim", description=desc, color=0xFF5733)
     today=date.today()
     today_date = today.strftime("%m/%d/%y")
@@ -187,7 +187,7 @@ async def sell_order(ctx, ticker, expiry, tp, image=None):
 @bot.command(name='msg')
 @commands.has_role('Prime')
 async def message(ctx, txt, image=None):
-    txt+="\n [Twitter](https://twitter.com/Prime_Options)"
+    txt+="\n [Linktree](https://linktr.ee/Prime_19)"
     embed=discord.Embed(description=txt, color=0x0112a0)
     today=date.today()
     today_date = today.strftime("%m/%d/%y")
@@ -205,8 +205,7 @@ async def message(ctx, txt, image=None):
             elif(channel.id in no_ping):
                 await channel.send(embed=embed)
 
-        
-
+    
 @bot.command(name='eSell')
 @commands.has_role('Prime')
 async def eSell(ctx, perc, ticker, price):
@@ -354,5 +353,8 @@ async def recap(ctx, tickers, percents):
                 await channel.send(ctx.message.guild.default_role, embed=embed)
             elif(channel.id in no_ping):
                 await channel.send(embed=embed)
+
+
+
 
 bot.run(TOKEN)
