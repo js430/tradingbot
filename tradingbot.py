@@ -29,6 +29,16 @@ else:
     role_pings=content.split(",")
     role_pings=[int(i) for i in role_pings]
     my_file.close()
+    my_file=open("challenge_channels.txt", "r")
+    content=my_file.read()
+    challenge_channels=content.split(",")
+    challenge_channels=[int(i) for i in challenge_channels]
+    my_file.close()
+    my_file=open("challenge_pings.txt", "r")
+    content=my_file.read()
+    challenge_pings=content.split(",")
+    challenge_pings=[int(i) for i in challenge_pings]
+    my_file.close()
     my_file=open("everyone_ping.txt", "r")
     content=my_file.read()
     everyone_servers=content.split(",")
@@ -116,6 +126,37 @@ async def unsub(ctx, type, channel:discord.TextChannel=None, ping:discord.Role=N
         file.write(new_string)
         file.close()
 
+@bot.command(name='csubscribe')
+async def sub(ctx, channel:discord.TextChannel, ping:discord.Role):
+    file=open("challenge_channels.txt","a")
+    string=","+str(channel.id)
+    file.write(string)
+    file.close()
+    file=open("challenge_pings.txt","a")
+    string=","+str(ping.id)
+    file.write(string)
+    file.close()
+
+@bot.command(name='cunsubscribe')
+async def sub(ctx, channel:discord.TextChannel, ping:discord.Role):
+    remove_channel=str(channel.id)
+    remove_ping=str(ping.id)
+    file=open("challenge_pings.txt", "r")
+    ps=file.read()
+    file.close()
+    new_string=",".join([i for i in ps.split(",") if i!= remove_ping])
+    file=open("challenge_pings.txt", "w")
+    file.truncate(0)
+    file.write(new_string)
+    file.close()
+    file=open("challenge_channels.txt", "r")
+    ps=file.read()
+    file.close()
+    file=open("challenge_channels.txt", "w")
+    file.truncate(0)
+    new_string=",".join([i for i in ps.split(",") if i!= remove_channel])
+    file.write(new_string)
+
 
 @bot.command(name='buy')
 @commands.has_role('Prime')
@@ -199,11 +240,39 @@ async def message(ctx, txt, image=None):
             if(channel.id in alert_channels):
                 role_id=role_pings[alert_channels.index(channel.id)]
                 role=get(guilds.roles, id=role_id)
+                #print(channel.id)
+                #print(role_id)
                 await channel.send(role.mention, embed=embed)
             elif(channel.id in everyone_servers):
                 await channel.send(ctx.message.guild.default_role, embed=embed)
             elif(channel.id in no_ping):
                 await channel.send(embed=embed)
+
+@bot.command(name='cmsg')
+@commands.has_role('Prime')
+async def mmsg(ctx, txt):
+    for guilds in bot.guilds:
+        for channel in guilds.channels:
+            if(channel.id in challenge_channels):
+                role_id=challenge_pings[challenge_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                await channel.send(f"{role.mention} {txt}")
+
+@bot.command(name='mmsg')
+@commands.has_role('Prime')
+async def mmsg(ctx, txt):
+    for guilds in bot.guilds:
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                #print(channel.id)
+                #print(role_id)
+                await channel.send(f"{role.mention} {txt}")
+            elif(channel.id in everyone_servers):
+                await channel.send(f"{ctx.message.guild.default_role} {txt}")
+            elif(channel.id in no_ping):
+                await channel.send(f"{txt}")
 
     
 @bot.command(name='eSell')
