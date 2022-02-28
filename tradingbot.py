@@ -16,7 +16,10 @@ GUILD=os.getenv('DISCORD_GUILD')
 
 TEST=False
 if TEST:
-    alert_channels=[928741202776457257]
+    alert_channels=[930167379080663071]
+    role_pings=[928716609084858418]
+    challenge_channels=[930167379080663071]
+    challenge_pings=[928716609084858418]
     #bot test
 else:
     my_file=open("channels.txt", "r")
@@ -258,7 +261,7 @@ async def mmsg(ctx, txt):
             if(channel.id in challenge_channels):
                 role_id=challenge_pings[challenge_channels.index(channel.id)]
                 role=get(guilds.roles, id=role_id)
-                await channel.send(f"{role.mention} {txt}")
+                await channel.send(f"{txt}{role.mention}")
 
 @bot.command(name='mmsg')
 @commands.has_role('Prime')
@@ -270,9 +273,9 @@ async def mmsg(ctx, txt):
                 role=get(guilds.roles, id=role_id)
                 #print(channel.id)
                 #print(role_id)
-                await channel.send(f"{role.mention} {txt}")
+                await channel.send(f"{txt}{role.mention}")
             elif(channel.id in everyone_servers):
-                await channel.send(f"{ctx.message.guild.default_role} {txt}")
+                await channel.send(f"{txt}{ctx.message.guild.default_role} ")
             elif(channel.id in no_ping):
                 await channel.send(f"{txt}")
 
