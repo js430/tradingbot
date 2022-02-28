@@ -126,6 +126,7 @@ async def unsub(ctx, type, channel:discord.TextChannel=None, ping:discord.Role=N
         file.write(new_string)
         file.close()
 
+#Challenge subscribe
 @bot.command(name='csubscribe')
 async def sub(ctx, channel:discord.TextChannel, ping:discord.Role):
     file=open("challenge_channels.txt","a")
@@ -137,6 +138,7 @@ async def sub(ctx, channel:discord.TextChannel, ping:discord.Role):
     file.write(string)
     file.close()
 
+#Challenge unsubscribe
 @bot.command(name='cunsubscribe')
 async def sub(ctx, channel:discord.TextChannel, ping:discord.Role):
     remove_channel=str(channel.id)
