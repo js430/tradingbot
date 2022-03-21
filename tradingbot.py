@@ -253,6 +253,29 @@ async def message(ctx, txt, image=None):
             elif(channel.id in no_ping):
                 await channel.send(embed=embed)
 
+@bot.command(name='embed')
+@commands.has_role('Prime')
+async def message(ctx, title, txt, image=None):
+    txt+="\n [Linktree](https://linktr.ee/Prime_19)"
+    embed=discord.Embed(title=title, description=txt, color=0x0112a0)
+    today=date.today()
+    today_date = today.strftime("%m/%d/%y")
+    embed.set_footer(text="© 2022 | Prime Options | "+today_date, icon_url="https://i.imgur.com/Z7VczhT.png")
+    if(image!=None):
+        embed.set_image(url=image)
+    for guilds in bot.guilds:
+        for channel in guilds.channels:
+            if(channel.id in alert_channels):
+                role_id=role_pings[alert_channels.index(channel.id)]
+                role=get(guilds.roles, id=role_id)
+                #print(channel.id)
+                #print(role_id)
+                await channel.send(role.mention, embed=embed)
+            elif(channel.id in everyone_servers):
+                await channel.send(ctx.message.guild.default_role, embed=embed)
+            elif(channel.id in no_ping):
+                await channel.send(embed=embed)
+
 @bot.command(name='cmsg')
 @commands.has_role('Prime')
 async def mmsg(ctx, txt):
