@@ -40,6 +40,10 @@ REMEMBER NEVER SHARE YOUR BOT TOKEN WITH ANYONE. TREAT IT LIKE YOU WOULD TREAT A
 #parameters: message, image(optional)
 !msg txt image=None
 
+#embed
+#parameters: title, txt, image(optional)
+!embed OPEN "4/1 SPY 470C @4.1"
+
 #recap
 #parameters: tickers, percents
 !recap SPY,VXX,SPX +500,+50,+1500
@@ -50,11 +54,25 @@ REMEMBER NEVER SHARE YOUR BOT TOKEN WITH ANYONE. TREAT IT LIKE YOU WOULD TREAT A
 !wrecap SPY,VXX,SPX +500,+50,+1500
 #identical to !recap, just titles it for the week rather than the day
 
+
+#Subscribe
+#parameters: Type, channel, ping
+#"Subscribes" the bot to the channel and ping role to be sent during alerts
+#3 kinds of pings: R: regular with a specific ping role, E: pings the @everyone role, N: Alerts do not ping any roles
+!subscribe r #channelname @pingrole
+
+#Unsubscribe
+#parameters: type, channel, ping
+#Does the opposite of Subscribe
+!unsubscribe r #channelname @pingrole
 ```
 
 ## Contributing
 Pull requests are welcome, if you want a copy of the bot for your own use, feel free or contact me @ jeffreyshi430@gmail.com if you wish for me to make you a version with your
 specifications/capabilities.
+
+## Discord Server
+Click [here](https://discord.gg/BQV96nQwZw) to access the official bot server on Discord.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
